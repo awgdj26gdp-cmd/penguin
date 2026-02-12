@@ -1,4 +1,4 @@
-const CACHE_NAME = "pomodoro-pet-v1";
+const CACHE_NAME = "pomodoro-pet-v3"; // ← v3に上げる
 const ASSETS = [
   "/penguin/",
   "/penguin/index.html",
