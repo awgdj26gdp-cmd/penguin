@@ -1,0 +1,142 @@
+:root{
+  --bg: #bfe9d3;
+  --ink: #2f3a4a;
+  --cream: #f6f0d8;
+  --button: #fff7e6;
+  --shadow: rgba(47,58,74,.15);
+}
+
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  display:grid;
+  place-items:center;
+  padding: 18px;
+  overflow:hidden;
+}
+
+/* ふわっと雲っぽい背景（画像なしで雰囲気出す） */
+body::before{
+  content:"";
+  position:fixed; inset:-40px;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(255,255,255,.9) 0 80px, transparent 81px),
+    radial-gradient(circle at 32% 26%, rgba(255,255,255,.9) 0 70px, transparent 71px),
+    radial-gradient(circle at 75% 30%, rgba(255,255,255,.9) 0 90px, transparent 91px),
+    radial-gradient(circle at 62% 32%, rgba(255,255,255,.9) 0 60px, transparent 61px),
+    radial-gradient(circle at 18% 62%, rgba(255,200,160,.45) 0 70px, transparent 71px),
+    radial-gradient(circle at 82% 65%, rgba(255,200,160,.45) 0 70px, transparent 71px);
+  filter: blur(0.2px);
+  z-index:-1;
+}
+
+.app{
+  width: min(520px, 92vw);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap: 18px;
+}
+
+/* まるいタイマー */
+.timerCircle{
+  width: min(320px, 78vw);
+  aspect-ratio: 1 / 1;
+  background: var(--cream);
+  border: 10px solid var(--ink);
+  border-radius: 999px;
+  display:grid;
+  place-items:center;
+  box-shadow: 0 10px 0 var(--shadow);
+}
+
+#time{
+  font-size: clamp(44px, 10vw, 78px);
+  font-weight: 800;
+  letter-spacing: 1px;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ボタン */
+.buttons{
+  display:flex;
+  gap: 14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+button{
+  min-width: 120px;
+  padding: 12px 18px;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--ink);
+  background: var(--button);
+  border: 8px solid var(--ink);
+  border-radius: 14px;
+  box-shadow: 0 8px 0 var(--shadow);
+  cursor:pointer;
+  text-transform: lowercase;
+}
+
+button:active{
+  transform: translateY(2px);
+  box-shadow: 0 6px 0 var(--shadow);
+}
+
+button:disabled{
+  opacity: .55;
+  cursor:not-allowed;
+}
+
+/* 猫エリア */
+.petWrap{
+  width: min(420px, 92vw);
+  display:grid;
+  place-items:center;
+  padding-top: 6px;
+}
+
+#pet{
+  width: min(320px, 76vw);
+  aspect-ratio: 1 / 1;
+  display:grid;
+  place-items:center;
+  user-select:none;
+}
+
+/* 猫（SVG）の基本 */
+.cat{
+  width: 100%;
+  height: 100%;
+  transform-origin: 50% 90%;
+  filter: drop-shadow(0 10px 0 rgba(47,58,74,.10));
+}
+
+/* 状態ごとのアニメ */
+.is-idle .cat{ animation: sway 2.2s ease-in-out infinite; }
+.is-focus .cat{ animation: bounce 0.85s ease-in-out infinite; }
+.is-done .cat{ animation: yay 1.2s ease-in-out infinite; }
+
+@keyframes sway{
+  0%,100%{ transform: rotate(-2deg) translateY(0); }
+  50%{ transform: rotate(2deg) translateY(-2px); }
+}
+@keyframes bounce{
+  0%,100%{ transform: translateY(0) scale(1); }
+  50%{ transform: translateY(-10px) scale(1.02); }
+}
+@keyframes yay{
+  0%,100%{ transform: translateY(0) rotate(0deg); }
+  30%{ transform: translateY(-12px) rotate(-3deg); }
+  60%{ transform: translateY(-12px) rotate(3deg); }
+}
+
+/* 動き苦手な人向け */
+@media (prefers-reduced-motion: reduce){
+  .cat{ animation: none !important; }
+}
