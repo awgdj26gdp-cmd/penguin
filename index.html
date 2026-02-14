@@ -1,32 +1,31 @@
-<!DOCYPE html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport
-content="width=device-width,
-initial-scale=1" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Pomodoro Pet</title>
+
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#ffffff">
 </head>
+
 <body>
   <h1>Pomodoro Pet</h1>
 
   <div id="pet">🐧 まってるよ</div>
-
   <div id="time">25:00</div>
 
   <button id="start">Start</button>
   <button id="stop" disabled>Stop</button>
   <button id="reset">Reset</button>
 
-  <script src="script.js"></script>
-<link rel="manifest" href="./manifest.json">
-<meta name="theme-color" content="#ffffff">
+  <script src="./script.js"></script>
+
   <script>
-  if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js");
-  }
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./service-worker.js");
+    }
   </script>
 </body>
-<html>
-
+</html>
 
