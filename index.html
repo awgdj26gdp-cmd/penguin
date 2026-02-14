@@ -7,25 +7,52 @@
 
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="./style.css">
 </head>
 
-<body>
-  <h1>Pomodoro Pet</h1>
+<body class="is-idle">
+  <main class="app">
+    <section class="timerCircle" aria-label="timer">
+      <div id="time">25:00</div>
+    </section>
 
-  <div id="pet">🐧 まってるよ</div>
-  <div id="time">25:00</div>
+    <section class="buttons">
+      <button id="start">start</button>
+      <button id="stop" disabled>stop</button>
+      <button id="reset">reset</button>
+    </section>
 
-  <button id="start">Start</button>
-  <button id="stop" disabled>Stop</button>
-  <button id="reset">Reset</button>
+    <section class="petWrap">
+      <div id="pet" aria-label="pet">
+        <!-- 猫SVG（画像なしでも可愛く） -->
+        <svg class="cat" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="cat">
+          <defs>
+            <style>
+              .o{fill:#fbfbfb;stroke:#2f3a4a;stroke-width:8;stroke-linecap:round;stroke-linejoin:round}
+              .e{fill:#2f3a4a}
+            </style>
+          </defs>
+          <!-- からだ -->
+          <path class="o" d="M70 70c-22 10-30 35-26 60 3 19 20 39 56 39s53-20 56-39c4-25-4-50-26-60-10-5-20-8-30-8s-20 3-30 8Z"/>
+          <!-- みみ -->
+          <path class="o" d="M65 70 45 48 58 80Z"/>
+          <path class="o" d="M135 70 155 48 142 80Z"/>
+          <!-- かお -->
+          <circle class="e" cx="85" cy="105" r="6"/>
+          <circle class="e" cx="115" cy="105" r="6"/>
+          <path class="o" d="M92 118c6 6 10 6 16 0"/>
+          <!-- しっぽ -->
+          <path class="o" d="M150 140c25 8 25 35 0 35-14 0-22-8-24-18"/>
+        </svg>
+      </div>
+    </section>
 
-  <script src="./script.js"></script>
-
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("./service-worker.js");
-    }
-  </script>
+    <script src="./script.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./service-worker.js");
+      }
+    </script>
+  </main>
 </body>
 </html>
-
