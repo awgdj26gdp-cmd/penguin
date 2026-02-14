@@ -1,5 +1,5 @@
 const timeEl = document.getElementById("time");
-const petEl = document.getElementById("pet");
+const petEl = document.getElementById("petMsg").textContent = "まってるよ";
 const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
 const resetBtn = document.getElementById("reset");
@@ -25,13 +25,13 @@ function render() {
   timeEl.textContent = format(remaining);
 
   if (timerId === null && remaining === POMODORO_SECONDS) {
-    petEl.textContent = "🐧 まってるよ";
+    petEl.textContent = "まってるよ";
   } else if (timerId !== null) {
-    petEl.textContent = "🐧 みまもり中…";
+    petEl.textContent = "みまもり中…";
   } else if (timerId === null && remaining === 0) {
-    petEl.textContent = "🐧 おつかれさま！";
+    petEl.textContent = "おつかれさま！";
   } else {
-    petEl.textContent = "🐧 ひとやすみしよ";
+    petEl.textContent = "ひとやすみしよ";
   }
 }
 
