@@ -4,6 +4,12 @@ const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
 const resetBtn = document.getElementById("reset");
 
+function setPetState(state) {
+  document.body.classList.remove("is-idle", "is-focus", "is-done");
+  document.body.classList.add(state);
+}
+
+
 const POMODORO_SECONDS = 25 * 60;
 
 let remaining = POMODORO_SECONDS;
