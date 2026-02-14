@@ -1,4 +1,4 @@
-const CACHE_NAME = "penguin-v1";
+const CACHE_NAME = "penguin";
 const ASSETS = ["./", "./index.html", "./script.js", "./manifest.json", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (event) => {
