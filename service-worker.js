@@ -1,15 +1,13 @@
-const CACHE_NAME = "pomodoro-pet-v5";
-const ASSETS = [
-  "/penguin/",
-  "/penguin/index.html",
-  "/penguin/script.js",
-  "/penguin/manifest.json",
-  "/penguin/icon-192.png",
-  "/penguin/icon-512.png"
-];
+const CACHE_NAME = "penguin-v1";
+const ASSETS = ["./", "./index.html", "./script.js", "./manifest.json", "./icon-192.png", "./icon-512.png"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
+  self.skipWaiting();
+});
+
+self.addEventListener("activate", (event) => {
+  event.waitUntil(self.clients.claim());
 });
 
 self.addEventListener("fetch", (event) => {
