@@ -13,21 +13,32 @@ body{
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   color: var(--ink);
 
-  /* ここがポイント：背景を画像にする */
-  background: url("./bg.png") center / cover no-repeat fixed;
+  /* 背景：丘は下に固定して見せる（超大事） */
+  background: url("./bg.png") center bottom / cover no-repeat fixed;
 
-  display:grid;
-  place-items:center;
-  padding: 18px;
+  /* レイアウト安定化 */
+  min-height: 100dvh;
+  display:flex;
+  justify-content:center;
+
+  /* 上下の余白を端末サイズに合わせて安定化 */
+  padding: clamp(12px, 2.4vh, 22px) 18px;
+
   overflow:hidden;
 }
 
 .app{
   width: min(520px, 92vw);
-  display:flex;
-  flex-direction:column;
+
+  display:grid;
+  grid-template-rows: auto auto 1fr; /* タイマー/ボタン/猫 */
+  gap: 16px;
+
   align-items:center;
-  gap: 18px;
+  justify-items:center;
+
+  /* ここで全体の縦の安定感を出す */
+  min-height: calc(100dvh - 2 * clamp(12px, 2.4vh, 22px));
 }
 
 /* まるいタイマー */
@@ -52,8 +63,9 @@ body{
 /* ボタン */
 .buttons{
   display:flex;
-  gap: 14px;
+  gap: 12px;
   justify-content:center;
+  align-items:center; /* ←これ追加で安定 */
   flex-wrap:wrap;
 }
 
@@ -86,16 +98,17 @@ button:disabled{
   width: min(420px, 92vw);
   display:grid;
   place-items:center;
-  padding-top: 6px;
+  padding-top: 0;
 }
 
 #pet{
-  width: min(320px, 76vw);
+  width: min(320px, 70vw);
+  max-width: 320px;
   aspect-ratio: 1 / 1;
   display:grid;
   place-items:center;
-  user-select:none;
 }
+
 
 /* 猫（SVG）の基本 */
 .petImg{
@@ -131,4 +144,16 @@ button:disabled{
 /* 動き苦手な人向け */
 @media (prefers-reduced-motion: reduce){
   .petImg{ animation: none !important; }
+}
+
+@media (max-width: 420px){
+  .buttons{
+    width: 100%;
+    flex-direction: column; 
+    align-items: center;
+  }
+
+  button{
+    width: min(320px, 86vw);
+  }
 }
