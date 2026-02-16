@@ -73,19 +73,6 @@ body{
   flex-wrap: nowrap; /* ★折り返さない（横並び固定） */
 }
 
-/* スマホではボタンを少し小さくして3つ入るようにする */
-@media (max-width: 420px){
-  button{
-    min-width: 0;
-    width: 30vw;              /* 3つ並べても入る */
-    max-width: 140px;         /* 大きくなりすぎ防止 */
-    padding: 10px 10px;
-    font-size: 18px;
-    border-width: 7px;
-  }
-}
-
-
 button{
   min-width: 120px;
   padding: 12px 18px;
@@ -119,7 +106,6 @@ button:disabled{
 
   /* ★ここ追加：猫を少し上に持ち上げる */
   transform: translateY(clamp(-46px, -6vh, -20px));
-}
 }
 
 #pet{
@@ -165,4 +151,18 @@ button:disabled{
 /* 動き苦手な人向け */
 @media (prefers-reduced-motion: reduce){
   .petImg{ animation: none !important; }
+}
+
+@media (max-width: 420px){
+  .buttons{
+    gap: 8px;
+  }
+  button{
+    min-width: 0;
+    width: 30vw;
+    max-width: 140px;
+    padding: 10px 10px;
+    font-size: 18px;
+    border: 7px solid var(--ink);
+  }
 }
