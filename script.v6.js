@@ -1,7 +1,7 @@
 // Pomodoro Pet - robust version (buttons always wired)
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("script.js loaded ✅");
+  console.log("script.v6.js loaded ✅");
 
   const timeEl = document.getElementById("time");
   const petEl = document.getElementById("petMsg");
