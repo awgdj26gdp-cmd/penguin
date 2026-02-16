@@ -8,7 +8,7 @@ const ASSETS = [
   "./icon-192.png",
   "./icon-512.png",
   "./bg.png",
-  "./cat.png",
+  "./cat_v2.png",
 ];
 
 self.addEventListener("install", (event) => {
