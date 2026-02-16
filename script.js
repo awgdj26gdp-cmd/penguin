@@ -1,9 +1,13 @@
+// 開始時に安全性チェックを追加
 const timeEl = document.getElementById("time");
 const petEl = document.getElementById("petMsg");
-petEl.textContent = "まってるよ";
 const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
 const resetBtn = document.getElementById("reset");
+
+if (!timeEl || !petEl || !startBtn || !stopBtn || !resetBtn) {
+  console.error("必要なDOM要素が見つかりません");
+}
 
 function setPetState(state) {
   document.body.classList.remove("is-idle", "is-focus", "is-done");
