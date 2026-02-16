@@ -1,3 +1,4 @@
+console.log("script.js loaded ✅");
 // Pomodoro Pet - safer & cleaner version
 
 (() => {
