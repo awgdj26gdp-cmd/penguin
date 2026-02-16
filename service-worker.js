@@ -1,4 +1,4 @@
-const CACHE_NAME = "penguin-v6"; // ★更新するたびに v を上げる
+const CACHE_NAME = "penguin-v7"; // ★更新するたびに v を上げる
 const ASSETS = [
   "./",
   "./index.html",
@@ -7,6 +7,8 @@ const ASSETS = [
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
+  "./bg.png",
+  "./cat.png",
 ];
 
 self.addEventListener("install", (event) => {
