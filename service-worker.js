@@ -8,7 +8,7 @@ const ASSETS = [
   "./icon-192.png",
   "./icon-512.png",
   "./bg-desktop.png",
-  "./bg-desktop.png",
+  "./bg-mobile.png",
   "./cat_v2.png",
 ];
 
