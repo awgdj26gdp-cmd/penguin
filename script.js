@@ -1,43 +1,46 @@
-console.log("script.js loaded ✅");
-// Pomodoro Pet - safer & cleaner version
+// Pomodoro Pet - robust version (buttons always wired)
 
-(() => {
-  // ===== DOM取得（見つからなければここで終了） =====
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("script.js loaded ✅");
+
   const timeEl = document.getElementById("time");
   const petEl = document.getElementById("petMsg");
   const startBtn = document.getElementById("start");
   const stopBtn = document.getElementById("stop");
   const resetBtn = document.getElementById("reset");
 
-  if (!timeEl || !petEl || !startBtn || !stopBtn || !resetBtn) {
-    console.error("必要なDOM要素が見つかりません（idを確認してください）");
-    return; // これ以上進むと落ちるので止める
+  // どれか欠けてたら、ここで止めて分かるようにする
+  const missing = [];
+  if (!timeEl) missing.push("#time");
+  if (!petEl) missing.push("#petMsg");
+  if (!startBtn) missing.push("#start");
+  if (!stopBtn) missing.push("#stop");
+  if (!resetBtn) missing.push("#reset");
+
+  if (missing.length) {
+    console.error("DOMが見つからない:", missing.join(", "));
+    alert("HTMLのidが合ってないかも: " + missing.join(", "));
+    return;
   }
 
-  // ===== 定数 =====
   const POMODORO_SECONDS = 25 * 60;
-
-  // ===== 状態 =====
   let remaining = POMODORO_SECONDS;
 
-  // setIntervalのズレを減らすために「終了予定時刻」を持つ
-  let endAtMs = null; // nullなら停止中
   let timerId = null;
+  let endAtMs = null; // 動作中は数値、停止中はnull
 
-  // ===== 見た目状態（CSS用） =====
   function setPetState(state) {
     document.body.classList.remove("is-idle", "is-focus", "is-done");
     document.body.classList.add(state);
   }
 
-  // ===== 表示用 =====
   function format(sec) {
     const m = Math.floor(sec / 60);
     const s = sec % 60;
     return `${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
   }
 
-  function setButtons({ running }) {
+  function setButtons(running) {
     startBtn.disabled = running;
     stopBtn.disabled = !running;
   }
@@ -48,27 +51,22 @@ console.log("script.js loaded ✅");
     const running = endAtMs !== null;
 
     if (!running && remaining === POMODORO_SECONDS) {
-      // 初期状態
       petEl.textContent = "まってるよ";
       setPetState("is-idle");
     } else if (running) {
-      // 集中中
       petEl.textContent = "みまもり中…";
       setPetState("is-focus");
     } else if (!running && remaining === 0) {
-      // 完了
       petEl.textContent = "おつかれさま！";
       setPetState("is-done");
     } else {
-      // 途中で止めた
       petEl.textContent = "ひとやすみしよ";
       setPetState("is-idle");
     }
 
-    setButtons({ running });
+    setButtons(running);
   }
 
-  // ===== タイマー制御 =====
   function tick() {
     if (endAtMs === null) return;
 
@@ -77,11 +75,49 @@ console.log("script.js loaded ✅");
     remaining = Math.max(0, secLeft);
 
     if (remaining === 0) {
-      stop(); // 自動停止
+      stop();
       return;
     }
+    render();
+  }
+
+  function start() {
+    console.log("start clicked");
+    if (endAtMs !== null) return;
+
+    if (remaining === 0) remaining = POMODORO_SECONDS;
+
+    endAtMs = Date.now() + remaining * 1000;
+    setButtons(true);
+    render();
+
+    // 念のため二重起動防止
+    if (timerId) clearInterval(timerId);
+    timerId = setInterval(tick, 250);
+  }
+
+  function stop() {
+    console.log("stop clicked");
+    if (endAtMs === null) return;
+
+    endAtMs = null;
+    if (timerId) clearInterval(timerId);
+    timerId = null;
 
     render();
   }
 
-  function st
+  function reset() {
+    console.log("reset clicked");
+    stop();
+    remaining = POMODORO_SECONDS;
+    render();
+  }
+
+  // クリックが確実に拾えてるか確認しやすいようにログつき
+  startBtn.addEventListener("click", start);
+  stopBtn.addEventListener("click", stop);
+  resetBtn.addEventListener("click", reset);
+
+  render();
+});
