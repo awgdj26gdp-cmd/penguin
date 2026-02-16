@@ -1,4 +1,4 @@
-const CACHE_NAME = "penguin-v8"; // ★更新するたびに v を上げる
+const CACHE_NAME = "penguin-v9"; // ★更新するたびに v を上げる
 const ASSETS = [
   "./", // ★名前を変更したら確認する
   "./index.html",
@@ -7,7 +7,8 @@ const ASSETS = [
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png",
-  "./bg.png",
+  "./bg-desktop.png",
+  "./bg-desktop.png",
   "./cat_v2.png",
 ];
 
