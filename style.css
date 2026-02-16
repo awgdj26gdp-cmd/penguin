@@ -13,19 +13,23 @@ body{
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   color: var(--ink);
 
-  /* 背景：丘は下に固定して見せる（超大事） */
-  background: url("./bg.png") center bottom / cover no-repeat fixed;
+  /* スマホ用をデフォルト */
+  background: url("./bg-mobile.png") center bottom / cover no-repeat fixed;
 
-  /* レイアウト安定化 */
   min-height: 100dvh;
   display:flex;
   justify-content:center;
-
-  /* 上下の余白を端末サイズに合わせて安定化 */
   padding: clamp(12px, 2.4vh, 22px) 18px;
-
   overflow:hidden;
 }
+
+/* PC（横長）になったらPC用背景に切り替え */
+@media (min-width: 768px){
+  body{
+    background-image: url("./bg-desktop.png");
+  }
+}
+
 
 .app{
   width: min(520px, 92vw);
@@ -54,7 +58,7 @@ body{
 }
 
 #time{
-  font-size: clamp(44px, 10vw, 78px);
+  font-size: clamp(52px, 12vw, 92px); /* ★少し大きく */
   font-weight: 800;
   letter-spacing: 1px;
   font-variant-numeric: tabular-nums;
@@ -65,9 +69,22 @@ body{
   display:flex;
   gap: 12px;
   justify-content:center;
-  align-items:center; /* ←これ追加で安定 */
-  flex-wrap:wrap;
+  align-items:center;
+  flex-wrap: nowrap; /* ★折り返さない（横並び固定） */
 }
+
+/* スマホではボタンを少し小さくして3つ入るようにする */
+@media (max-width: 420px){
+  button{
+    min-width: 0;
+    width: 30vw;              /* 3つ並べても入る */
+    max-width: 140px;         /* 大きくなりすぎ防止 */
+    padding: 10px 10px;
+    font-size: 18px;
+    border-width: 7px;
+  }
+}
+
 
 button{
   min-width: 120px;
@@ -99,6 +116,10 @@ button:disabled{
   display:grid;
   place-items:center;
   padding-top: 0;
+
+  /* ★ここ追加：猫を少し上に持ち上げる */
+  transform: translateY(clamp(-46px, -6vh, -20px));
+}
 }
 
 #pet{
@@ -144,16 +165,4 @@ button:disabled{
 /* 動き苦手な人向け */
 @media (prefers-reduced-motion: reduce){
   .petImg{ animation: none !important; }
-}
-
-@media (max-width: 420px){
-  .buttons{
-    width: 100%;
-    flex-direction: column; 
-    align-items: center;
-  }
-
-  button{
-    width: min(320px, 86vw);
-  }
 }
