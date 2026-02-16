@@ -32,15 +32,20 @@ self.addEventListener("activate", (event) => {
 
 self.addEventListener("fetch", (event) => {
   const req = event.request;
-
-  // GET以外は触らない（安全）
   if (req.method !== "GET") return;
 
-  event.respondWith((async () => {
-    const cached = await caches.match(req);
-    if (cached) return cached;
+  const url = new URL(req.url);
 
-    const res = await fetch(req);
-    return res;
-  })());
+  // ★画像はネット優先（更新が反映されやすい）
+  if (req.destination === "image") {
+    event.respondWith(
+      fetch(req).catch(() => caches.match(req))
+    );
+    return;
+  }
+
+  // それ以外はキャッシュ優先
+  event.respondWith(
+    caches.match(req).then((cached) => cached || fetch(req))
+  );
 });
