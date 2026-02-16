@@ -12,26 +12,14 @@ body{
   margin:0;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
   color: var(--ink);
-  background: var(--bg);
+
+  /* ここがポイント：背景を画像にする */
+  background: url("./bg.png") center / cover no-repeat fixed;
+
   display:grid;
   place-items:center;
   padding: 18px;
   overflow:hidden;
-}
-
-/* ふわっと雲っぽい背景（画像なしで雰囲気出す） */
-body::before{
-  content:"";
-  position:fixed; inset:-40px;
-  background:
-    radial-gradient(circle at 20% 25%, rgba(255,255,255,.9) 0 80px, transparent 81px),
-    radial-gradient(circle at 32% 26%, rgba(255,255,255,.9) 0 70px, transparent 71px),
-    radial-gradient(circle at 75% 30%, rgba(255,255,255,.9) 0 90px, transparent 91px),
-    radial-gradient(circle at 62% 32%, rgba(255,255,255,.9) 0 60px, transparent 61px),
-    radial-gradient(circle at 18% 62%, rgba(255,200,160,.45) 0 70px, transparent 71px),
-    radial-gradient(circle at 82% 65%, rgba(255,200,160,.45) 0 70px, transparent 71px);
-  filter: blur(0.2px);
-  z-index:-1;
 }
 
 .app{
