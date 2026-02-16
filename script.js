@@ -1,5 +1,6 @@
 const timeEl = document.getElementById("time");
-const petEl = document.getElementById("petMsg").textContent = "まってるよ";
+const petEl = document.getElementById("petMsg");
+petEl.textContent = "まってるよ";
 const startBtn = document.getElementById("start");
 const stopBtn = document.getElementById("stop");
 const resetBtn = document.getElementById("reset");
