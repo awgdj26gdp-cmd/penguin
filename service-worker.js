@@ -2,7 +2,7 @@ const CACHE_NAME = "penguin-v6"; // ★更新するたびに v を上げる
 const ASSETS = [
   "./",
   "./index.html",
-  "./script.js",
+  "./script.v6.js",
   "./style.css",
   "./manifest.json",
   "./icon-192.png",
