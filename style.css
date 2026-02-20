@@ -33,16 +33,13 @@ body{
 
 .app{
   width: min(520px, 92vw);
-
   display:grid;
   grid-template-rows: auto auto 1fr; /* タイマー/ボタン/猫 */
   gap: 16px;
-
   align-items:center;
   justify-items:center;
-
-  /* ここで全体の縦の安定感を出す */
   min-height: calc(100dvh - 2 * clamp(12px, 2.4vh, 22px));
+  text-align: center; /* テキスト中央寄せ */
 }
 
 /* まるいタイマー */
@@ -103,11 +100,7 @@ button:disabled{
 }
 
 #petMsg{
-  position: absolute;
-  top: -10px;           /* 猫の上に出す */
-  left: 50%;
-  transform: translateX(-50%);
-
+  /*position: absolute; ←使わない*/
   background: white;
   padding: 8px 14px;
   border-radius: 20px;
@@ -115,8 +108,9 @@ button:disabled{
   font-weight: 700;
   font-size: 16px;
   white-space: nowrap;
-
   box-shadow: 0 4px 0 var(--shadow);
+  margin-bottom: 12px; /* 猫との間に余白をつける*/
+  text-align: center; /* 中央に配置 */
 }
 
 #pet{
